@@ -53,10 +53,10 @@ public static class Arrays
         // now that we saved the values we need we clean the old data list and add/append the new values
 
         int totalValues = data.Count;
-        int effectiveAmount = amount % totalValues;
-        int splitIndex = totalValues - effectiveAmount;
+        int effectiveNumber = amount % totalValues;
+        int splitIndex = totalValues - effectiveNumber;
 
-        List<int> tail = data.GetRange(splitIndex, effectiveAmount);
+        List<int> tail = data.GetRange(splitIndex, effectiveNumber);
 
         List<int> head = data.GetRange(0, splitIndex);
 
