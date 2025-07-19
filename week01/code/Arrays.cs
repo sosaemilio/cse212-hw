@@ -42,5 +42,26 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        //EMILIO'S RESPONSE
+        // We start by getting how many numbers we are getting in the input
+        // We use module to cut the number in case the amount is higher than the total values
+        // using the effectiveNumber and the total values we reduce the number and find the index where we will cut the arrawy
+        // using getRange we will extract the values, using the point index where we will start and the amount
+        // then the head which is supposed to be the rest of the values, we will use the same method but with the index 0 and the splitIndex
+        // Finally we create a new list and add the tail first and then the head, so the values are in the right order.
+        // now that we saved the values we need we clean the old data list and add/append the new values
+
+        int totalValues = data.Count;
+        int effectiveAmount = amount % totalValues;
+        int splitIndex = totalValues - effectiveAmount;
+
+        List<int> tail = data.GetRange(splitIndex, effectiveAmount);
+
+        List<int> head = data.GetRange(0, splitIndex);
+
+        data.Clear();
+        data.AddRange(tail);
+        data.AddRange(head);
     }
 }
