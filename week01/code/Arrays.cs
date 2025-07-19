@@ -13,7 +13,20 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // EMILIO'S RESPONSE
+        // I started by setting up an static array using the defined paramenter of the method, since it was mentioned it can be a double I select a array of type double.
+        // after that since it is a list/arrway I created a loop that stopped when the max lenght is reached out.
+        // Using i I added the value or number inside the space and multiplied the existing itineration with the number, since the itineration starts with 0 I added + 1, 
+        // so it doesn't start with 0, it starts with the real number
+
+        double[] multipleStaticArray = new double[length];
+
+        for (int i = 0; i < length; i++)
+        {
+            multipleStaticArray[i] = (i + 1) * number;
+        }
+
+        return  multipleStaticArray;; // replace this return statement with your own
     }
 
     /// <summary>
