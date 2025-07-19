@@ -52,9 +52,9 @@ public static class Arrays
         // Finally we create a new list and add the tail first and then the head, so the values are in the right order.
         // now that we saved the values we need we clean the old data list and add/append the new values
 
-        int totalValues = data.Count;
-        int effectiveNumber = amount % totalValues;
-        int splitIndex = totalValues - effectiveNumber;
+        int totalNumberOfValues = data.Count;
+        int effectiveNumber = amount % totalNumberOfValues;
+        int splitIndex = totalNumberOfValues - effectiveNumber;
 
         List<int> tail = data.GetRange(splitIndex, effectiveNumber);
 
