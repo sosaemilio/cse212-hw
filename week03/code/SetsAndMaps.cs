@@ -66,6 +66,22 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            // The degree is in the 4th column
+            if (fields.Length > 3)
+            {   
+                // REMOVE WHITESPACE
+                string degree = fields[3].Trim();
+
+                // Update the dictionary
+                if (degrees.ContainsKey(degree))
+                {
+                    degrees[degree]++;
+                }
+                else
+                {
+                    degrees[degree] = 1;
+                }
+            }
         }
 
         return degrees;
