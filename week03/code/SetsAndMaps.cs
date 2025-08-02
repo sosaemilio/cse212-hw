@@ -22,7 +22,30 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        //CONVERT TO WORDSET AND SAVE RESULT
+        var wordSet = new HashSet<string>(words);
+        var result = new List<string>();
+
+        foreach (var word in words)
+        {
+            // This confirm if the next letter is going to be the same.
+            // RUBRIC: As a special case, if the letters are the same (example: aa) then it would not match anything else
+            //  (remember the assumption above that there were no duplicates) and therefore should not be returned.
+            if (word[0] == word[1])
+            {
+                continue;
+            }
+
+            // Create the symmetric word
+            string symmetricWord = $"{word[1]}{word[0]}";
+
+            if (wordSet.Contains(symmetricWord) && string.Compare(word, symmetricWord, StringComparison.Ordinal) < 0)
+            {
+                result.Add($"{word} & {symmetricWord}");
+            }
+        }
+
+        return result.ToArray();
     }
 
     /// <summary>
@@ -67,7 +90,48 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        string cleanedWord1 = word1.Replace(" ", "").ToLower();
+        string cleanedWord2 = word2.Replace(" ", "").ToLower();
+
+        // Add condition to prevent the error with differnt sizes
+        if (cleanedWord1.Length != cleanedWord2.Length)
+        {
+            return false;
+        }
+
+        // Use a dictionary to store character counts for the first word
+        var charCounts = new Dictionary<char, int>();
+
+        foreach (char c in cleanedWord1)
+        {
+            if (charCounts.ContainsKey(c))
+            {
+                charCounts[c]++;
+            }
+            else
+            {
+                charCounts[c] = 1;
+            }
+        }
+
+        // Iterate through the second word and check against the dictionary
+        foreach (char c in cleanedWord2)
+        {
+            // If a character from the second word is not in the dictionary,
+            // or its count is already zero, they are not anagrams.
+            if (!charCounts.ContainsKey(c) || charCounts[c] == 0)
+            {
+                return false;
+            }
+            else
+            {
+                charCounts[c]--;
+            }
+        }
+
+        // If all characters in the second word were successfully matched and
+        // decremented, the words are anagrams.
+        return true;
     }
 
     /// <summary>
