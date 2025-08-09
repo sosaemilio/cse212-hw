@@ -155,7 +155,7 @@ public class LinkedList : IEnumerable<int>
         //creates a node with the head element
         Node? current = _head;
 
-        // We use a while since there could be multiple so we need to intenarate
+        // We use a while since there could be multiple so we need to intenarate, since the list doens't have a static set of spaces
         while (current is not null)
         {
             // this one confirms if the head is the same as the value added to the method
@@ -197,6 +197,20 @@ public class LinkedList : IEnumerable<int>
     public void Replace(int oldValue, int newValue)
     {
         // TODO Problem 4
+        // picks the last element of the list or the head
+        Node? currentValue = _head;
+
+        // We confirm that current isn't empty or finished
+        while (currentValue is not null)
+        {
+            // if the element of the current value matches the old value it means we need to remove it
+            if (currentValue.Data == oldValue)
+            {
+                currentValue.Data = newValue;
+            }
+            // We move to the next node to replace the value until it is done,
+            currentValue = currentValue.Next;
+        }
     }
 
     /// <summary>
