@@ -241,7 +241,17 @@ public class LinkedList : IEnumerable<int>
     public IEnumerable Reverse()
     {
         // TODO Problem 5
-        yield return 0; // replace this line with the correct yield return statement(s)
+        // Start with the tail since this is the otherway 
+        var currrentValue = _tail;
+
+        // As long as the currentValue isn't empty it itinerates
+        while (currrentValue is not null)
+        {
+            yield return currrentValue.Data; // replace this line with the correct yield return statement(s)
+
+            // Go to the previous element to continue the rotation
+            currrentValue = currrentValue.Prev;
+        }
     }
 
     public override string ToString()
