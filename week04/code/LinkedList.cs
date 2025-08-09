@@ -1,4 +1,5 @@
 using System.Collections;
+using System.ComponentModel.Design;
 
 public class LinkedList : IEnumerable<int>
 {
@@ -33,6 +34,20 @@ public class LinkedList : IEnumerable<int>
     public void InsertTail(int value)
     {
         // TODO Problem 1
+        Node newNode = new(value);
+
+        // Check if the tail is null and if so, set both head and tail to the new node.
+        if (_tail is null)
+        {
+            _head = newNode;
+            _tail = newNode;
+        }
+        else
+        {
+            newNode.Prev = _tail;
+            _tail.Next = newNode;
+            _tail = newNode;
+        }
     }
 
 
@@ -65,6 +80,28 @@ public class LinkedList : IEnumerable<int>
     public void RemoveTail()
     {
         // TODO Problem 2
+        if (_tail is null)
+        {
+            return;
+        }
+
+        // If the head and tail are the same we set it up to null
+        if (_head == _tail)
+        {
+            _head = null;
+            _tail = null;
+        }
+        else
+        {
+            // if not we select the previous node and save it on the same one
+            _tail = _tail.Prev;
+
+            // if isn't null it will add null to the next one removing the "next" one
+            if (_tail is not null)
+            {
+                _tail.Next = null;
+            }
+        }
     }
 
     /// <summary>
@@ -109,6 +146,49 @@ public class LinkedList : IEnumerable<int>
     public void Remove(int value)
     {
         // TODO Problem 3
+        //fixes the test method of the empty list. it simplies confirmation and return if empty
+        if (_head is null)
+        {
+            return;
+        }
+
+        //creates a node with the head element
+        Node? current = _head;
+
+        // We use a while since there could be multiple so we need to intenarate
+        while (current is not null)
+        {
+            // this one confirms if the head is the same as the value added to the method
+            if (current.Data == value)
+            {
+                // Check and remove if it is the head
+                if (current == _head)
+                {
+                    RemoveHead();
+                }
+                // Check and remove if the tail, in case the first one isn't met
+                else if (current == _tail)
+                {
+                    RemoveTail();
+                }
+                // this removes them in case the elements are the mid
+                else
+                {
+                    if (current.Prev is not null)
+                    {
+                        current.Prev.Next = current.Next;
+                    }
+                    if (current.Next is not null)
+                    {
+                        current.Next.Prev = current.Prev;
+                    }
+                }
+                // We removed and exit
+                return;
+            }
+            current = current.Next;
+        }
+
     }
 
     /// <summary>
@@ -168,8 +248,10 @@ public class LinkedList : IEnumerable<int>
     }
 }
 
-public static class IntArrayExtensionMethods {
-    public static string AsString(this IEnumerable array) {
+public static class IntArrayExtensionMethods
+{
+    public static string AsString(this IEnumerable array)
+    {
         return "<IEnumerable>{" + string.Join(", ", array.Cast<int>()) + "}";
     }
 }
